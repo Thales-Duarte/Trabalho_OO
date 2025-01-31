@@ -3,11 +3,11 @@ package main.services;
 import java.time.LocalDate;
 
 
-public abstract class BasePrescricao {
-    private Consulta consultaAssociada;
+public abstract class Prescricao {
+    protected Consulta consultaAssociada;
     private LocalDate dataValidade;
 
-    public BasePrescricao(Consulta consultaAssociada, LocalDate dataValidade) {
+    public Prescricao(Consulta consultaAssociada, LocalDate dataValidade) {
         this.consultaAssociada = consultaAssociada;
         this.dataValidade = dataValidade;
     }
@@ -20,3 +20,4 @@ public abstract class BasePrescricao {
         return dataValidade;
     }
 }
+

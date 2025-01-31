@@ -1,7 +1,7 @@
 package main.services;
 
 import main.entities.*;
-import main.enume.Status;
+import main.enums.Status;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,6 +16,8 @@ public class Consulta {
     private Medico medico;
     private Paciente paciente;
     private List<Exame> exames = new ArrayList<>();
+    private List<Tratamento> tratamentos = new ArrayList<>();
+    private List<Medicamento> medicamentos = new ArrayList<>();
 
     public Consulta(LocalDate dataConsulta, LocalTime horarioInicio, int duracaoMinutos, Status status, Medico medico, Paciente paciente) {
         this.dataConsulta = dataConsulta;
@@ -74,9 +76,19 @@ public class Consulta {
         this.paciente = paciente;
     }
 
+    public void adicionarTratamento(Tratamento tratamento) {
+        tratamentos.add(tratamento);
+    }
+    
     public void adicionarExame(Exame exame) {
         exames.add(exame);
     }
+    
+    public void adicionarMedicamento(Medicamento medicamento) {
+        medicamentos.add(medicamento);
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -1,7 +1,8 @@
-package main.services;
+package main.gerencia;
 
 import main.entities.*;
 import main.excecoes.*;
+import main.services.Consulta;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,7 +42,7 @@ public class SistemaGerenciamentoClinica {
         }
         
         if (consulta.getDataConsulta().isBefore(LocalDate.now())) {
-           throw new ConsultaDataInvalidaException("Data Inválida.");
+           throw new ConsultaDataInvalidaException(".");
         }
         
         for (Consulta c : consultasExistentes) {

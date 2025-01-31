@@ -1,4 +1,4 @@
-package main.enume; 
+package main.enums; 
 
 public enum Status {
     AGENDADA, 
