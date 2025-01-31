@@ -9,7 +9,6 @@ Implementações:
 
 registro de históricos médicos
 
-Prescrição de exames/medicamentos. 
 
 Além disso, deve garantir regras de negócio como:
 
