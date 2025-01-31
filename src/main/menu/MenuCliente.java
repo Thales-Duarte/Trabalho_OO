@@ -55,7 +55,7 @@ public class MenuCliente implements Menu {
         }
 
         for (Exame exame : exames) {
-            if (exame.getConsulta().getPaciente().equals(paciente) &&
+            if (exame.getPaciente().equals(paciente) &&
                 !exame.getDataValidade().isBefore(hoje) &&
                 exame.getDataValidade().isBefore(hoje.plusDays(3))) {
                 System.out.println("Lembrete: Seu exame de " + exame.getTipo() +

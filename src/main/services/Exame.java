@@ -1,6 +1,7 @@
 package main.services;
 
 import java.time.LocalDate;
+import main.entities.*;
 
 import main.enums.Tipo;
 
@@ -10,8 +11,8 @@ public class Exame extends Prescricao {
     private LocalDate dataRealizacao;
     private double custo;
 
-    public Exame(Tipo tipo, LocalDate dataRealizacao, double custo, Consulta consultaAssociada, LocalDate dataValidade) {
-        super(consultaAssociada, dataValidade);
+    public Exame(Tipo tipo, LocalDate dataRealizacao, double custo, Paciente paciente, LocalDate dataValidade) {
+        super(paciente, dataValidade);
         this.tipo = tipo;
         this.dataRealizacao = dataRealizacao;
         this.custo = custo;
@@ -29,7 +30,7 @@ public class Exame extends Prescricao {
         return custo;
     }
 
-    public Consulta getConsulta(){
-        return consultaAssociada;
+    public Paciente getPaciente(){
+        return paciente;
     }
 }

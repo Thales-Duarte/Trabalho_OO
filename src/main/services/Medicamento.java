@@ -1,13 +1,13 @@
 package main.services;
 
-import java.time.LocalDate;
+import main.entities.Paciente;
 
 public class Medicamento extends Prescricao {
     private String nome;
     private String dosagem;
 
-    public Medicamento(String nome, String dosagem, Consulta consultaAssociada, LocalDate dataValidade) {
-        super(consultaAssociada, dataValidade);
+    public Medicamento(String nome, String dosagem, Paciente paciente) {
+        super(paciente);
         this.nome = nome;
         this.dosagem = dosagem;
     }
@@ -20,7 +20,7 @@ public class Medicamento extends Prescricao {
         return dosagem;
     }
 
-    public Consulta getConsulta(){
-        return consultaAssociada;
+    public Paciente getPaciente(){
+        return paciente;
     }
 }

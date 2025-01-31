@@ -17,10 +17,11 @@ public class Main {
         List<Consulta> consultasExistentes = new ArrayList<>();
         List<Paciente> pacientes = new ArrayList<>();
         List<Medico> medicos = new ArrayList<>();
+        List<Prescricao> prescricao = new ArrayList<>();
         List<Exame> exames = new ArrayList<>();
 
         Menu menuCliente = new MenuCliente(scanner, pacientes, consultasExistentes, exames);
-        Menu menuFuncionario = new MenuFuncionario(scanner, pacientes, medicos, consultasExistentes, exames, sistema);
+        Menu menuFuncionario = new MenuFuncionario(scanner, pacientes, medicos, consultasExistentes, prescricao, sistema);
 
         while (true) {
             System.out.println("\n=== Bem-vindo ao Sistema de Gerenciamento de Clínica ===");

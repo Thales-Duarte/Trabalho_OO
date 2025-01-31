@@ -1,6 +1,7 @@
 package main.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 
@@ -26,6 +27,25 @@ public abstract class Pessoa {
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
-
     
+    
+     public static Pessoa buscar(String cpf, List<? extends Pessoa> pessoas) {
+        for (Pessoa p : pessoas) {
+            if (p.getCpf().equals(cpf)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    // Método para atualizar os dados de uma pessoa
+    public void atualizar(String novoNome) {
+        this.nome = novoNome;
+    }
+
+    // Método para remover uma pessoa da lista
+    public static boolean deletar(String cpf, List<? extends Pessoa> pessoas) {
+        return pessoas.removeIf(p -> p.getCpf().equals(cpf));
+    }
 }
+    
