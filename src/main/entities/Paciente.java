@@ -10,6 +10,7 @@ import main.services.*;
 public class Paciente extends Pessoa {
     private List<Consulta> historicoConsultas = new ArrayList<>();
     private boolean possuiPagamentoPendente;
+    private List<Prescricao> prescricoes = new ArrayList<>();
 
     public Paciente(String nome, String cpf, LocalDate dataNascimento) {
         super(nome, cpf, dataNascimento);
@@ -30,4 +31,9 @@ public class Paciente extends Pessoa {
     public void setPossuiPagamentoPendente(boolean possuiPagamentoPendente) {
         this.possuiPagamentoPendente = possuiPagamentoPendente;
     }
+    
+    public List<Prescricao> getPrescricoes(){
+        return prescricoes;
+    }
+
 }

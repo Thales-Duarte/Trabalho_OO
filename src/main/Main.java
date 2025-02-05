@@ -15,12 +15,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         SistemaGerenciamentoClinica sistema = new SistemaGerenciamentoClinica();
         List<Consulta> consultasExistentes = new ArrayList<>();
-
-        List<Prescricao> prescricao = new ArrayList<>();
         List<Exame> exames = new ArrayList<>();
 
         Menu menuCliente = new MenuCliente(scanner, consultasExistentes, exames, sistema);
-        Menu menuFuncionario = new MenuFuncionario(scanner, consultasExistentes, prescricao, sistema);
+        Menu menuFuncionario = new MenuFuncionario(scanner, sistema);
 
         while (true) {
             System.out.println("\n=== Bem-vindo ao Sistema de Gerenciamento de Clínica ===");
