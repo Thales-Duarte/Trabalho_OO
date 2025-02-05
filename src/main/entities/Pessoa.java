@@ -38,14 +38,14 @@ public abstract class Pessoa {
         return null;
     }
 
-    // Método para atualizar os dados de uma pessoa
+   
     public void atualizar(String novoNome, String cpf, LocalDate dataNascimento) {
         this.nome = novoNome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
 
-    // Método para remover uma pessoa da lista
+    
     public static boolean deletar(String cpf, List<? extends Pessoa> pessoas) {
         return pessoas.removeIf(p -> p.getCpf().equals(cpf));
     }
