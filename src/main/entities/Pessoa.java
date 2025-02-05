@@ -29,7 +29,7 @@ public abstract class Pessoa {
     }
     
     
-     public static Pessoa buscar(String cpf, List<? extends Pessoa> pessoas) {
+    public static Pessoa buscar(String cpf, List<? extends Pessoa> pessoas) {
         for (Pessoa p : pessoas) {
             if (p.getCpf().equals(cpf)) {
                 return p;
@@ -39,8 +39,10 @@ public abstract class Pessoa {
     }
 
     // Método para atualizar os dados de uma pessoa
-    public void atualizar(String novoNome) {
+    public void atualizar(String novoNome, String cpf, LocalDate dataNascimento) {
         this.nome = novoNome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
     }
 
     // Método para remover uma pessoa da lista

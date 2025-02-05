@@ -3,6 +3,8 @@
 Projeto java de programacao orientada a objetos.
 Versão 1.0
 
+Resolver controler e funções de sistema par funcionario
+
 Ainda necessário rever o enunciado do trabalho e melhora-lo.
 
 Implementações: 

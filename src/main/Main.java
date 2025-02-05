@@ -1,9 +1,9 @@
 package main;
 
-import main.entities.*;
+import main.controller.*;
+
 
 import main.services.*;
-import main.gerencia.*;
 import main.menu.*;
 
 import java.util.ArrayList;
@@ -15,13 +15,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         SistemaGerenciamentoClinica sistema = new SistemaGerenciamentoClinica();
         List<Consulta> consultasExistentes = new ArrayList<>();
-        List<Paciente> pacientes = new ArrayList<>();
-        List<Medico> medicos = new ArrayList<>();
+
         List<Prescricao> prescricao = new ArrayList<>();
         List<Exame> exames = new ArrayList<>();
 
-        Menu menuCliente = new MenuCliente(scanner, pacientes, consultasExistentes, exames);
-        Menu menuFuncionario = new MenuFuncionario(scanner, pacientes, medicos, consultasExistentes, prescricao, sistema);
+        Menu menuCliente = new MenuCliente(scanner, consultasExistentes, exames, sistema);
+        Menu menuFuncionario = new MenuFuncionario(scanner, consultasExistentes, prescricao, sistema);
 
         while (true) {
             System.out.println("\n=== Bem-vindo ao Sistema de Gerenciamento de Clínica ===");
@@ -31,7 +30,7 @@ public class Main {
             System.out.print("Escolha uma opção: ");
 
             int opcaoInicial = scanner.nextInt();
-            scanner.nextLine(); // Consumir quebra de linha
+            scanner.nextLine();
 
             switch (opcaoInicial) {
                 case 1 -> menuCliente.exibirMenu();

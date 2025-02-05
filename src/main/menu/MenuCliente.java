@@ -1,5 +1,6 @@
 package main.menu;
 
+import main.controller.SistemaGerenciamentoClinica;
 import main.entities.*;
 
 import java.time.LocalDate;
@@ -9,19 +10,20 @@ import main.services.*;
 
 public class MenuCliente implements Menu {
     private final Scanner scanner;
-    private final List<Paciente> pacientes;
     private final List<Consulta> consultas;
     private final List<Exame> exames;
+    private final SistemaGerenciamentoClinica sistema;
 
-    public MenuCliente(Scanner scanner, List<Paciente> pacientes, List<Consulta> consultas, List<Exame> exames) {
+    public MenuCliente(Scanner scanner, List<Consulta> consultas, List<Exame> exames, SistemaGerenciamentoClinica sistema) {
         this.scanner = scanner;
-        this.pacientes = pacientes;
         this.consultas = consultas;
         this.exames = exames;
+        this.sistema = sistema;
     }
     
     @Override
     public void exibirMenu() {
+        List<Paciente> pacientes = sistema.getPacientes();
         System.out.println("\n=== Área do Cliente ===");
         if (pacientes.isEmpty()) {
             System.out.println("Nenhum paciente cadastrado.");

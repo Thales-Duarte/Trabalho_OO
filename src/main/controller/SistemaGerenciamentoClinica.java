@@ -1,4 +1,4 @@
-package main.gerencia;
+package main.controller;
 
 import main.entities.*;
 import main.excecoes.*;
@@ -61,5 +61,14 @@ public class SistemaGerenciamentoClinica {
         consulta.getPaciente().adicionarConsulta(consulta);
         consulta.getMedico().adicionarConsulta(consulta);
     }
+
+
+public List<Paciente> getPacientes() {
+    return pacientes;
 }
 
+public List<Medico> getMedicos() {
+    return medicos;
+}
+
+}

@@ -1,11 +1,13 @@
 package main.menu;
 
+import main.controller.SistemaGerenciamentoClinica;
 import main.entities.*;
 import main.excecoes.ConsultaDataInvalidaException;
 import main.excecoes.ConsultaForaDoHorarioException;
 import main.excecoes.HorarioIndisponivelException;
+import main.excecoes.MedicoJaCadastradoException;
+import main.excecoes.PacienteJaCadastradoException;
 import main.excecoes.PagamentoPendenteException;
-import main.gerencia.SistemaGerenciamentoClinica;
 import main.services.*;
 import java.util.List;
 import java.util.Scanner;
@@ -15,18 +17,14 @@ import main.enums.*;;
 
 public class MenuFuncionario implements Menu {
     private final Scanner scanner;
-    private final List<Paciente> pacientes;
-    private final List<Medico> medicos;
     private final List<Consulta> consultasExistentes;
     private final List<Prescricao> prescricao;
-    
     private final SistemaGerenciamentoClinica sistema;
+    
 
-    public MenuFuncionario(Scanner scanner, List<Paciente> pacientes, List<Medico> medicos, 
+    public MenuFuncionario(Scanner scanner, 
                            List<Consulta> consultas, List<Prescricao> prescricao, SistemaGerenciamentoClinica sistema) {
         this.scanner = scanner;
-        this.pacientes = pacientes;
-        this.medicos = medicos;
         this.consultasExistentes = consultas;
         this.prescricao= prescricao;
         this.sistema = sistema;
@@ -40,7 +38,7 @@ public class MenuFuncionario implements Menu {
             System.out.println("2. Cadastrar Médico");
             System.out.println("3. Agendar Consulta");
             System.out.println("4. Prescrever");
-            System.out.println("5. Visualizar Consultas");
+            System.out.println("5. Atualizar Banco de dados");
             System.out.println("6. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
 
@@ -52,7 +50,7 @@ public class MenuFuncionario implements Menu {
                 case 2 -> cadastrarMedico();
                 case 3 -> agendarConsulta();
                 case 4 -> prescrever();
-                //case 5 -> visualizarConsultas();
+                case 5 -> AtualizarBanco();
                 case 6 -> { return; }
                 default -> System.out.println("Opção inválida. Tente novamente.");
             }
@@ -66,8 +64,17 @@ public class MenuFuncionario implements Menu {
         String cpf = scanner.nextLine();
         System.out.print("Data de nascimento (YYYY-MM-DD): ");
         LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
-        pacientes.add(new Paciente(nome, cpf, dataNascimento));
+        
+        Paciente paciente = new Paciente(nome, cpf, dataNascimento); 
+        
+        try {
+        sistema.cadastrarPaciente(paciente);
         System.out.println("Paciente cadastrado com sucesso!");
+    } catch (PacienteJaCadastradoException e) {
+        System.out.println("Erro: " + e.getMessage());
+    } catch (ConsultaDataInvalidaException e) {
+            System.out.println("Erro ao cadastrar paciente: " + e.getMessage());
+        }
     }
 
     private void cadastrarMedico() {
@@ -81,12 +88,21 @@ public class MenuFuncionario implements Menu {
         String crm = scanner.nextLine();
         System.out.print("Especialidade: ");
         String especialidade = scanner.nextLine();
-        medicos.add(new Medico(nome, cpf, dataNascimento, crm, especialidade));
-        System.out.println("Médico cadastrado com sucesso!");
-    }
+         Medico novoMedico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
 
-    private void agendarConsulta() {
-        
+    try {
+        sistema.cadastrarMedico(novoMedico);
+        System.out.println("Médico cadastrado com sucesso!");
+    } catch (MedicoJaCadastradoException e) {
+        System.out.println("Erro ao cadastrar médico: " + e.getMessage());
+    }
+}
+       
+    
+private void agendarConsulta() {
+    List<Paciente> pacientes = sistema.getPacientes();
+    List<Medico> medicos = sistema.getMedicos();    
+    
         if (pacientes.isEmpty() || medicos.isEmpty()) {
                 System.out.println("É necessário cadastrar pacientes e médicos antes de agendar uma consulta.");
                     exibirMenu();
@@ -152,10 +168,13 @@ public class MenuFuncionario implements Menu {
     
     private void prescreverExames() {
 
+        List<Paciente> pacientes = sistema.getPacientes();
+    
+
         System.out.println("Digite o CPF do paciente");
         String cpf = scanner.nextLine();
        
-        Paciente pacienteEncontrado = buscarPacientePorCPF(cpf);
+        Paciente pacienteEncontrado =  (Paciente) Pessoa.buscar(cpf, pacientes);
         
         if (pacienteEncontrado != null) {
         System.out.println("Paciente encontrado: " + pacienteEncontrado.getNome());
@@ -183,6 +202,9 @@ public class MenuFuncionario implements Menu {
     }
 
     private void prescreverMedicamentos() {
+        
+        List<Paciente> pacientes = sistema.getPacientes();
+    
         System.out.println("Digite o CPF do paciente");
         String cpf = scanner.nextLine();
         System.out.println("Digite o nome do medicamento:");
@@ -190,7 +212,7 @@ public class MenuFuncionario implements Menu {
         System.out.println("Digite a dosagem:");
         String dosagem = scanner.nextLine();
 
-        Paciente pacienteEncontrado = buscarPacientePorCPF(cpf);
+        Paciente pacienteEncontrado =  (Paciente) Pessoa.buscar(cpf, pacientes);
 
         if (pacienteEncontrado != null) {
         System.out.println("Paciente encontrado: " + pacienteEncontrado.getNome());
@@ -204,6 +226,9 @@ public class MenuFuncionario implements Menu {
     }
 
     private void prescreverTratamentos() {
+
+        List<Paciente> pacientes = sistema.getPacientes();
+   
         System.out.println("Digite o CPF do paciente");
         String cpf = scanner.nextLine();
         System.out.println("Digite a descrição do tratamento:");
@@ -212,7 +237,7 @@ public class MenuFuncionario implements Menu {
         int duracao = scanner.nextInt();
         scanner.nextLine();
 
-        Paciente pacienteEncontrado = buscarPacientePorCPF(cpf);
+        Paciente pacienteEncontrado =  (Paciente) Pessoa.buscar(cpf, pacientes);
 
         if (pacienteEncontrado != null) {
         System.out.println("Paciente encontrado: " + pacienteEncontrado.getNome());
@@ -224,20 +249,132 @@ public class MenuFuncionario implements Menu {
         prescricao.add(tratamento);
         System.out.println("Tratamento prescrito com sucesso!");
     }
+    
+    private void AtualizarBanco(){
+        while (true) {
+            System.out.println("\n=== Menu Funcionário ===");
+            System.out.println("1. Atualizar");
+            System.out.println("2. Excluir");
+            System.out.println("3. Buscar");
+            System.out.println("4. Voltar");
+            System.out.print("Escolha uma opção: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1 -> Atualizar();
+                case 2 -> Excluir();
+                case 3 -> Buscar();
+                case 4 -> exibirMenu();
+                default -> System.out.println("Opção inválida.");
+            }
+        }
+
+    }
+
+    private void Buscar(){
+        List<Paciente> pacientes = sistema.getPacientes();
+        List<Medico> medicos = sistema.getMedicos();
+        
+            System.out.println("Digite o cpf: ");
+            String cpf = scanner.nextLine();
+            
+            Paciente pacienteEncontrado =  (Paciente) Pessoa.buscar(cpf, pacientes);
+
+        if (pacienteEncontrado != null) {
+        System.out.println("Paciente encontrado: " + pacienteEncontrado.getNome());
+        } 
+        
+        else {
+            Medico medicoEncontrado =  (Medico) Pessoa.buscar(cpf, medicos);
+
+            if (medicoEncontrado != null) {
+            System.out.println("Medico encontrado: " + medicoEncontrado.getNome());
+            } else {
+            System.out.println("Pessoa não encontrada.");
+            }
+        }
+
+        }
+
+    
+
+    private void Atualizar(){
+
+        List<Paciente> pacientes = sistema.getPacientes();
+        List<Medico> medicos = sistema.getMedicos();
+
+        System.out.println("Digite o cpf: ");
+        String cpf = scanner.nextLine();
+
+        Paciente pacienteEncontrado =  (Paciente) Pessoa.buscar(cpf, pacientes);
+
+        if (pacienteEncontrado != null) {
+        System.out.println("Paciente encontrado: " + pacienteEncontrado.getNome());
+        System.out.println("Novo nome: ");
+        String name = scanner.nextLine();
+        System.out.println("Novo cpf: ");
+        String novoCPF= scanner.nextLine();
+        System.out.print("Data de nascimento (YYYY-MM-DD): ");
+        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+        pacienteEncontrado.atualizar(name, novoCPF, dataNascimento);
+        } 
+        
+        else {
+            Medico medicoEncontrado =  (Medico) Pessoa.buscar(cpf, medicos);
+
+            if (medicoEncontrado != null) {
+            System.out.println("Medico encontrado: " + medicoEncontrado.getNome());
+            System.out.println("Novo nome: ");
+            String name = scanner.nextLine();
+            System.out.println("Novo cpf: ");
+            String novoCPF= scanner.nextLine();
+            System.out.print("Data de nascimento (YYYY-MM-DD): ");
+            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+            medicoEncontrado.atualizar(name, novoCPF, dataNascimento);
+            } else {
+            System.out.println("Pessoa não encontrada.");
+            }
+        }
+
+        
+    }
+
+    private void Excluir(){
+
+        List<Paciente> pacientes = sistema.getPacientes();
+        List<Medico> medicos = sistema.getMedicos();
+
+        System.out.println("Digite o cpf: ");
+        String cpf = scanner.nextLine();
+
+        boolean resultado =  Pessoa.deletar(cpf, pacientes);
+
+        if (resultado) {
+        System.out.println("Paciente excluido!");
+        } 
+        
+        else {
+            boolean resultado2 =  Pessoa.deletar(cpf, medicos);
+
+            if (resultado2) {
+            System.out.println("Medico excluido!");
+            } else {
+            System.out.println("Pessoa não encontrada.");
+            }
+        }
+
+
+        
+    }
+
+
+
+}
 
    
 
 
 
 
-    private Paciente buscarPacientePorCPF(String cpf) {
-    for (Paciente paciente : pacientes) {
-        if (paciente.getCpf().equals(cpf)) {
-            return paciente;
-        }
-    }
-    return null; // Retorna null se o paciente não for encontrado
-    }
-}
-
-        
+  
