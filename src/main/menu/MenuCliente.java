@@ -39,6 +39,7 @@ public class MenuCliente implements Menu {
         Paciente paciente = pacientes.get(pacienteIndex);
 
         exibirNotificacoes(paciente);
+        return;
     }
 
     private void exibirNotificacoes(Paciente paciente) {
