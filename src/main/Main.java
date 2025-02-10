@@ -3,21 +3,18 @@ package main;
 import main.controller.*;
 
 
-import main.services.*;
 import main.menu.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaGerenciamentoClinica sistema = new SistemaGerenciamentoClinica();
-        List<Consulta> consultasExistentes = new ArrayList<>();
-        List<Exame> exames = new ArrayList<>();
 
-        Menu menuCliente = new MenuCliente(scanner, consultasExistentes, exames, sistema);
+
+        Menu menuCliente = new MenuCliente(scanner, sistema);
         Menu menuFuncionario = new MenuFuncionario(scanner, sistema);
 
         while (true) {

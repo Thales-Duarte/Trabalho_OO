@@ -10,14 +10,10 @@ import main.services.*;
 
 public class MenuCliente implements Menu {
     private final Scanner scanner;
-    private final List<Consulta> consultas;
-    private final List<Exame> exames;
     private final SistemaGerenciamentoClinica sistema;
 
-    public MenuCliente(Scanner scanner, List<Consulta> consultas, List<Exame> exames, SistemaGerenciamentoClinica sistema) {
+    public MenuCliente(Scanner scanner, SistemaGerenciamentoClinica sistema) {
         this.scanner = scanner;
-        this.consultas = consultas;
-        this.exames = exames;
         this.sistema = sistema;
     }
     
@@ -47,7 +43,7 @@ public class MenuCliente implements Menu {
         System.out.println("\n=== Notificações ===");
 
         boolean temNotificacoes = false;
-        for (Consulta consulta : consultas) {
+        for (Consulta consulta : paciente.getHistoricoConsultas()) {
             if (consulta.getPaciente().equals(paciente) &&
                 !consulta.getDataConsulta().isBefore(hoje) &&
                 consulta.getDataConsulta().isBefore(hoje.plusDays(3))) {
@@ -57,7 +53,7 @@ public class MenuCliente implements Menu {
             }
         }
 
-        for (Exame exame : exames) {
+        for (Exame exame : paciente.getExames()) {
             if (exame.getPaciente().equals(paciente) &&
                 !exame.getDataValidade().isBefore(hoje) &&
                 exame.getDataValidade().isBefore(hoje.plusDays(3))) {
