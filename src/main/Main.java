@@ -12,8 +12,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SistemaGerenciamentoClinica sistema = new SistemaGerenciamentoClinica();
-
-
         Menu menuCliente = new MenuCliente(scanner, sistema);
         Menu menuFuncionario = new MenuFuncionario(scanner, sistema);
 

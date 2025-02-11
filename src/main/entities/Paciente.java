@@ -11,7 +11,7 @@ public class Paciente extends Pessoa {
     private List<Consulta> historicoConsultas = new ArrayList<>();
     private boolean possuiPagamentoPendente;
     private List<Prescricao> prescricoes = new ArrayList<>();
-    private List<Exame> exames = new ArrayList<>();
+
 
     public Paciente(String nome, String cpf, LocalDate dataNascimento) {
         super(nome, cpf, dataNascimento);
@@ -37,8 +37,5 @@ public class Paciente extends Pessoa {
         return prescricoes;
     }
     
-    public List<Exame> getExames() {
-        return exames;
-    }
 
 }

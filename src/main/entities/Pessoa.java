@@ -47,7 +47,11 @@ public abstract class Pessoa {
 
     
     public static boolean deletar(String cpf, List<? extends Pessoa> pessoas) {
-        return pessoas.removeIf(p -> p.getCpf().equals(cpf));
+        
+        if (cpf == null || cpf.isBlank()) {
+            return false;
+        }
+        return pessoas.removeIf(p -> cpf.equals(p.getCpf()));
     }
 }
     

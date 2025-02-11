@@ -135,7 +135,7 @@ public class SistemaGerenciamentoClinica {
         }
     }
 
-    // Método para buscar pacientes ou médicos
+    
     public void buscarPessoa() {
         System.out.println("Digite o CPF:");
         String cpf = scanner.nextLine();
@@ -180,14 +180,13 @@ public class SistemaGerenciamentoClinica {
 
     // Método para excluir pacientes ou médicos
     public void excluirPessoa() {
+        
         System.out.println("Digite o CPF:");
-        String cpf = scanner.nextLine();
-
-        if (Pessoa.deletar(cpf, pacientes) || Pessoa.deletar(cpf, medicos)) {
-            System.out.println("Pessoa excluída com sucesso!");
-        } else {
-            System.out.println("Pessoa não encontrada.");
-        }
+        String cpf = scanner.nextLine().trim();
+    
+        boolean removido = Pessoa.deletar(cpf, pacientes) || Pessoa.deletar(cpf, medicos);
+    
+        System.out.println(removido ? "Pessoa excluída com sucesso!" : "Pessoa não encontrada.");
     }
 
     // Getters

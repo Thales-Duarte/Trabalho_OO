@@ -95,11 +95,11 @@ private void agendarConsulta() {
     if (sistema.getPacientes().isEmpty() || sistema.getMedicos().isEmpty()) {
         System.out.println("É necessário cadastrar pacientes e médicos antes de agendar uma consulta.");
         exibirMenu();
-        return;  // Saímos da função para evitar erros
+        return;  
     }
 
     try {
-        // Seleção do paciente
+       
         System.out.println("Selecione o paciente: ");
         for (int i = 0; i < sistema.getPacientes().size(); i++) {
             System.out.println((i + 1) + ". " + sistema.getPacientes().get(i).getNome());
@@ -112,7 +112,6 @@ private void agendarConsulta() {
             return;
         }
 
-        // Seleção do médico
         System.out.println("Selecione o médico: ");
         for (int i = 0; i < sistema.getMedicos().size(); i++) {
             System.out.println((i + 1) + ". " + sistema.getMedicos().get(i).getNome() + " - " + sistema.getMedicos().get(i).getEspecialidade());
@@ -125,7 +124,7 @@ private void agendarConsulta() {
             return;
         }
 
-        // Entrada da data e hora
+       
         System.out.print("Data da consulta (YYYY-MM-DD): ");
         LocalDate dataConsulta = LocalDate.parse(scanner.nextLine());
         System.out.print("Hora de início (HH:MM): ");
@@ -139,13 +138,14 @@ private void agendarConsulta() {
                 sistema.getMedicos().get(medicoIndex), sistema.getPacientes().get(pacienteIndex));
                 sistema.agendarConsulta(consulta);
                 System.out.println("Consulta agendada com sucesso!");
+                sistema.getPacientes().get(pacienteIndex).setPossuiPagamentoPendente(true);
                 tentativaAgendamento = false;  // Sai do loop
             } catch (HorarioIndisponivelException e) {
                 System.out.println("Erro: Horário indisponível. " + e.getMessage());
                 tentativaAgendamento = false;  // Sai do loop
             } catch (PagamentoPendenteException e) {
-                System.out.println("Erro: Pagamento pendente. " + e.getMessage());
-
+                System.out.println("Erro: " + e.getMessage());
+                //Verificar e resolver pagamentos pendentes.
                 boolean respostaValida = false;
                 while (!respostaValida) {
                     System.out.println("O pagamento já foi efetuado (Sim/Nao)? ");
@@ -163,17 +163,18 @@ private void agendarConsulta() {
                     }
                 }
             } catch (ConsultaForaDoHorarioException e) {
-                System.out.println("Erro: A consulta está fora do horário permitido. " + e.getMessage());
-                tentativaAgendamento = false;  // Sai do loop
+                System.out.println("Erro: " + e.getMessage());
+                tentativaAgendamento = false;  
             } catch (ConsultaDataInvalidaException e) {
-                System.out.println("Erro: Data inválida para consulta. " + e.getMessage());
-                tentativaAgendamento = false;  // Sai do loop
+                System.out.println("Erro: " + e.getMessage());
+                tentativaAgendamento = false;  
             }
         }
     } catch (Exception e) {
         System.out.println("Erro inesperado: " + e.getMessage());
     }
 }
+
 
  
 
@@ -192,7 +193,7 @@ private void agendarConsulta() {
                 case 1 -> sistema.prescreverExames();
                 case 2 -> sistema.prescreverMedicamentos();
                 case 3 -> sistema.prescreverTratamentos();
-                case 4 -> exibirMenu();
+                case 4 -> {return;}
                 default -> System.out.println("Opção inválida.");
             }
         }
@@ -216,7 +217,7 @@ private void agendarConsulta() {
                 case 1 -> sistema.atualizarPessoa();
                 case 2 -> sistema.excluirPessoa();
                 case 3 -> sistema.buscarPessoa();
-                case 4 -> exibirMenu();
+                case 4 -> {return;}
                 default -> System.out.println("Opção inválida.");
             }
         }

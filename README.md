@@ -15,6 +15,7 @@ Este projeto é um sistema de gerenciamento para clínicas médicas, permitindo 
 - Cadastrar Pacientes e Médicos: O funcionário pode cadastrar novos pacientes e médicos no sistema.
 - Agendamento de Consultas: O funcionário pode agendar consultas entre pacientes e médicos, garantindo que o horário e a data sejam válidos.
 - Prescrição de Exames, Medicamentos e Tratamentos: O funcionário pode prescrever exames, medicamentos e tratamentos para os pacientes durante as consultas.
+- Tipos de Exames os quais são ENUM: SANGUE, RAIO_X, ULTRASSOM.   
 - Atualização de Banco de Dados: O funcionário pode atualizar, excluir ou buscar dados no banco de dados da clínica.
 - Verificação de Pagamento: Antes de agendar uma consulta, o funcionário verifica se o paciente tem algum pagamento pendente.
 

@@ -4,7 +4,6 @@ import main.controller.SistemaGerenciamentoClinica;
 import main.entities.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 import main.services.*;
 
@@ -19,20 +18,19 @@ public class MenuCliente implements Menu {
     
     @Override
     public void exibirMenu() {
-        List<Paciente> pacientes = sistema.getPacientes();
         System.out.println("\n=== Área do Cliente ===");
-        if (pacientes.isEmpty()) {
+        if (sistema.getPacientes().isEmpty()) {
             System.out.println("Nenhum paciente cadastrado.");
             return;
         }
 
         System.out.println("Selecione seu nome: ");
-        for (int i = 0; i < pacientes.size(); i++) {
-            System.out.println((i + 1) + ". " + pacientes.get(i).getNome());
+        for (int i = 0; i < sistema.getPacientes().size(); i++) {
+            System.out.println((i + 1) + ". " + sistema.getPacientes().get(i).getNome());
         }
         int pacienteIndex = scanner.nextInt() - 1;
         scanner.nextLine();
-        Paciente paciente = pacientes.get(pacienteIndex);
+        Paciente paciente = sistema.getPacientes().get(pacienteIndex);
 
         exibirNotificacoes(paciente);
         return;
@@ -53,14 +51,18 @@ public class MenuCliente implements Menu {
             }
         }
 
-        for (Exame exame : paciente.getExames()) {
-            if (exame.getPaciente().equals(paciente) &&
-                !exame.getDataValidade().isBefore(hoje) &&
-                exame.getDataValidade().isBefore(hoje.plusDays(3))) {
-                System.out.println("Lembrete: Seu exame de " + exame.getTipo() +
-                        " deve ser realizado até " + exame.getDataValidade());
-                temNotificacoes = true;
-            }
+
+        for (Prescricao prescricao : paciente.getPrescricoes()) {
+            if(prescricao instanceof Exame){
+                Exame exame = (Exame) prescricao;
+                if (exame.getPaciente().equals(paciente) &&
+                    !exame.getDataValidade().isBefore(hoje) &&
+                    exame.getDataValidade().isBefore(hoje.plusDays(3))) {
+                    System.out.println("Lembrete: Seu exame de " + exame.getTipo() +
+                            " deve ser realizado até " + exame.getDataValidade());
+                    temNotificacoes = true;
+                }
+        }
         }
 
         
