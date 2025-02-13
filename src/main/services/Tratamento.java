@@ -21,7 +21,4 @@ public class Tratamento extends Prescricao {
         return duracaoDias;
     }
 
-    public Paciente getPaciente(){
-        return paciente;
-    }
 }

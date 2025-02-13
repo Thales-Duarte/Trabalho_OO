@@ -30,7 +30,5 @@ public class Exame extends Prescricao {
         return custo;
     }
 
-    public Paciente getPaciente(){
-        return paciente;
-    }
+
 }

@@ -20,7 +20,4 @@ public class Medicamento extends Prescricao {
         return dosagem;
     }
 
-    public Paciente getPaciente(){
-        return paciente;
-    }
 }
