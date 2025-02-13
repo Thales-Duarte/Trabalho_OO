@@ -2,6 +2,10 @@
 
 Este projeto é um sistema de gerenciamento para clínicas médicas, permitindo que tanto pacientes quanto funcionários (secretários, médicos, etc.) possam interagir com a plataforma para registrar informações e realizar operações, como agendamento de consultas, prescrição de exames, cadastro de médicos e pacientes, entre outras funcionalidades.
 
+## Documentação Detalhada com UML 
+
+A documentação do projeto encontra-se no seguinte link: https://docs.google.com/document/d/1VvsK7ISzDW31R3vFaG01NnyJHhDUHibDpcqq9Rfqs-c/edit?usp=sharing
+
 ## Funcionalidades
 
 **Para o Cliente (Paciente)**
@@ -57,9 +61,6 @@ O sistema trata várias exceções para garantir a integridade dos dados:
 - Pagamento pendente: Se o paciente ainda não efetuou o pagamento, o agendamento é bloqueado.
 - Consulta fora do horário permitido: Impede o agendamento de consultas fora do horário comercial.
 
-## Documentação
-
-A documentação do projeto encontra-se no seguinte link: https://docs.google.com/document/d/1VvsK7ISzDW31R3vFaG01NnyJHhDUHibDpcqq9Rfqs-c/edit?usp=sharing
 
 ## Contribuições
 
