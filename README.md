@@ -57,6 +57,10 @@ O sistema trata várias exceções para garantir a integridade dos dados:
 - Pagamento pendente: Se o paciente ainda não efetuou o pagamento, o agendamento é bloqueado.
 - Consulta fora do horário permitido: Impede o agendamento de consultas fora do horário comercial.
 
+## Documentação
+
+A documentação do projeto encontra-se no seguinte link: https://docs.google.com/document/d/1VvsK7ISzDW31R3vFaG01NnyJHhDUHibDpcqq9Rfqs-c/edit?usp=sharing
+
 ## Contribuições
 
 - Faça um fork do repositório.
