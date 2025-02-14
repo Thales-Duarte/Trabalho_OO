@@ -14,11 +14,17 @@ O Diagrama de Objeto pode ser acessado por meio do Lucidchart, basta seguir o li
 
 O Diagrama de Classes pode ser acessado por meio do Drawio, segue as instruções para visualização:
 Link para acesso: https://encurtador.com.br/piNE7 
+
 Passo 1: Acesse o Drawio pelo link e selecione "Tentar abrir através dessa página" 
+
 Passo 2: Baixe o documento
+
 Passo 3: Acesse o Drawio novamente e abra um projeto ja existente
+
 Passo 4: Selecione a forma de armazenamento, indicação: Aparelho
+
 Passo 5: Escolher a opção: Abrir Arquivo na pasta onde está armazenado, nome do arquivo: TrabalhoOOdefinitivo.drawio
+
 Seguindo esses passos o arquivo estará disponível para visualização
 
 ## Funcionalidades
