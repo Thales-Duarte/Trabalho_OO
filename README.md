@@ -4,7 +4,28 @@ Este projeto é um sistema de gerenciamento para clínicas médicas, permitindo 
 
 ## Documentação Detalhada com UML 
 
-A documentação do projeto encontra-se no seguinte link: https://docs.google.com/document/d/1VvsK7ISzDW31R3vFaG01NnyJHhDUHibDpcqq9Rfqs-c/edit?usp=sharing
+A documentação do projeto encontra-se no seguinte link: https://encurtador.com.br/18NUL
+
+## Diagrama de Objetos 
+
+O Diagrama de Objeto pode ser acessado por meio do Lucidchart, basta seguir o link a seguir: https://encurtador.com.br/isZsA
+
+## Diagrama de Classes 
+
+O Diagrama de Classes pode ser acessado por meio do Drawio, segue as instruções para visualização:
+Link para acesso: https://encurtador.com.br/piNE7 
+
+Passo 1: Acesse o Drawio pelo link e selecione "Tentar abrir através dessa página" 
+
+Passo 2: Baixe o documento
+
+Passo 3: Acesse o Drawio novamente e abra um projeto ja existente
+
+Passo 4: Selecione a forma de armazenamento, indicação: Aparelho
+
+Passo 5: Escolher a opção: Abrir Arquivo na pasta onde está armazenado, nome do arquivo: TrabalhoOOdefinitivo.drawio
+
+Seguindo esses passos o arquivo estará disponível para visualização
 
 ## Funcionalidades
 
